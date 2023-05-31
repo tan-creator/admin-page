@@ -1,0 +1,11 @@
+sonarqube_analysis:
+  image: sonarsource/sonar-scanner-cli:latest
+  variables:
+    SONAR_HOST_URL: "https://sq.runsystem.info"
+    SONAR_TOKEN: $SONAR_TOKEN
+  script:
+    - /opt/sonar-scanner/bin/sonar-scanner -Dsonar.projectKey=dn_ecs_training -Dsonar.projectName="[DN.ECS] Training" -Dsonar.sources=. -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_TOKEN
+  only:
+    - ecs # branch
+  tags:
+    - ecs_training
